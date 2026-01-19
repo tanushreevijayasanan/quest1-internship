@@ -1,4 +1,2 @@
-*.class
-bin/
-out/
-target/
+build/
+.gradle/
