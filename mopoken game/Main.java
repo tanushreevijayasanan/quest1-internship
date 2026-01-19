@@ -41,8 +41,17 @@ public class Main {
                     }
                 }
                 System.out.println(output.toString());
-                int wins = BattleStrategy.simulateBattle(winningArrangement, oppTeam);
+
+
+                int[] results = BattleStrategy.executeBattle(winningArrangement, oppTeam);
+                int wins = results[0];
+                int loss = results[1];
+                int draws = results[2];
                 System.out.println("you won " + wins + " out of 5 battles :)");
+                System.out.println("\nYour team after battle:");
+                for (Mopokens m : winningArrangement) {
+                    System.out.println(m + " (XP: " + m.getXP() + "/100)");
+                }
             } else {
                 System.out.println("you can't win :(");
             }
