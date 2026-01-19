@@ -46,7 +46,7 @@ public class BattleStrategy {
         return wins;
     }
     
-    public static int executeBattle(List<Mopokens> myArrangement, List<Mopokens> opponentTeam){
+    public static int[] executeBattle(List<Mopokens> myArrangement, List<Mopokens> opponentTeam){
         int wins = 0;
         int loss = 0;
         int draws = 0;
