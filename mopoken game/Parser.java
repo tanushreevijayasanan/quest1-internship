@@ -33,6 +33,7 @@ public class Parser {
             if(seenTypes.contains(type)){
                 throw new IllegalArgumentException("duplicate mopoken type " + type + ", no type repeats allowed !!");
             }
+            seenTypes.add(type);
 
             int level;
             try {

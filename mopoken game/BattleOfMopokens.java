@@ -20,8 +20,10 @@ public class BattleOfMopokens {
     public static Mopokens whoIsTheWinner(Mopokens mopoken1, Mopokens mopoken2) {
         if (canBeat(mopoken1, mopoken2)) {
             return mopoken1;
-        } else {
+        } else if (canBeat(mopoken2, mopoken1)){
             return mopoken2;
+        }else{
+            return null;
         }
     }
 }
