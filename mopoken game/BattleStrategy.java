@@ -46,6 +46,29 @@ public class BattleStrategy {
         return wins;
     }
     
+    public static int executeBattle(List<Mopokens> myArrangement, List<Mopokens> opponentTeam){
+        int wins = 0;
+        int loss = 0;
+        int draws = 0;
+        for (int i =0; i < total_wins; i++){
+            Mopokens myMopokens = myArrangement.get(i);
+            Mopokens oppMopokens = opponentTeam.get(i);
+            MopokensWinner = BattleOfMopokens.whoIsTheWinner(myMopokens, oppMopokens);
+            if (winner == null){
+                draws++;
+            }else if (winner == myMopokens){
+                wins++;
+                XPrules.addWinXP(myMopokens);
+                XPrules.subtractLossXP(oppMopokens);
+            }else{
+                loss++;
+                XPrules.addWinXP(oppMopokens);
+                XPrules.subtractLossXP(myMopokens);
+            }
+
+        }
+        return new int[]{wins, loss, draws};
+    }
 
     public static List<List<Mopokens>> generatePermutations(List<Mopokens> Mopokenss) {
         List<List<Mopokens>> result = new ArrayList<>();
