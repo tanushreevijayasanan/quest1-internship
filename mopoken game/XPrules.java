@@ -9,7 +9,7 @@ public class XPrules {
     }
 
     public static void subtractLossXP(Mopokens loser){
-        loser.setXP(loser.getXP() - lose_xp);
+        int newXP = Math.max(0, loser.getXP() - lose_xp);
         loser.setXP(newXP);
     }
 
@@ -19,5 +19,5 @@ public class XPrules {
             mopoken.setXP(mopoken.getXP() - levelup_xp);
         }
     }
-    
+
 }

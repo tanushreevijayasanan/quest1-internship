@@ -53,7 +53,7 @@ public class BattleStrategy {
         for (int i =0; i < total_wins; i++){
             Mopokens myMopokens = myArrangement.get(i);
             Mopokens oppMopokens = opponentTeam.get(i);
-            MopokensWinner = BattleOfMopokens.whoIsTheWinner(myMopokens, oppMopokens);
+            Mopokens winner = BattleOfMopokens.whoIsTheWinner(myMopokens, oppMopokens);
             if (winner == null){
                 draws++;
             }else if (winner == myMopokens){

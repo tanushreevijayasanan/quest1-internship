@@ -1,10 +1,12 @@
 class Mopokens{
     private String type;
     private int level;
+    private int xp;
 
     public Mopokens(String type, int level){
         this.type = type;
         this.level = level;
+        this.xp = 0;
     }
     public String getType(){
         return type;
@@ -13,8 +15,8 @@ class Mopokens{
         return level;
     }
 
-    public int getXP(int XP){
-        return XP;
+    public int getXP(){
+        return xp;
     }
 
     public void setType(String type){
@@ -26,7 +28,7 @@ class Mopokens{
     }   
 
     public void setXP(int XP){
-        this.XP = XP;
+        this.xp = XP;
     }
     @Override
     public String toString(){
