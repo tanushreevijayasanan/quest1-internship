@@ -77,10 +77,16 @@ public class Interpreter{
     }
 
     public Object eval(String source){
-        throw new UnsupportedOperationException("lexer and parser not implemented yet");
+        Lexer lexer = new Lexer(source);
+        Parser parser = new Parser(lexer);
+        Node ast = parser.parseExpression();
+        return ast.accept(evalVisitor);
     }
 
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
+        String source = "(+ 1 2 3 4 5)";
+        Object result = interpreter.eval(source);
+        System.out.println("Result: " + result);
     }
 }

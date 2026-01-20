@@ -2,7 +2,7 @@ package lisp.lexer;
 
 public class Lexer {
     private final String input;
-    private static int position = 0;
+    private int position = 0;
     public Lexer(String input) {
         this.input = input;
     }
@@ -20,30 +20,36 @@ public class Lexer {
 
     Token nextToken() {
         while (Character.isWhitespace(peek())) advance();
+
         char c = peek();
-        if (c == '\0') return new Token(TokenType.EOF, "");
-        if (character.isDigit(c)) {
-            StringBuilder num = new StringBuilder();
-            while (Character.isDigit(peek())) {
-                num.append(advance());
-            }
-            return new Token(TokenType.NUMBER, num.toString());
+        if (c == '\0') 
+            return new Token(TokenType.EOF, "");
+
+        if (c == '(') {
+            advance();
+            return new Token(TokenType.LPAREN, "(");
         }
-        if(character.isLetter(c)) {
-            StringBuilder sym = new StringBuilder();
-            while (Character.isLetterOrDigit(peek())) {
-                sym.append(advance());
-            }
-            return new Token(TokenType.SYMBOL, sym.toString());
+
+        if (c == ')') {
+            advance();
+            return new Token(TokenType.RPAREN, ")");
         }
-        advance();
-        return switch(c){
-            case '+' -> new Token(TokenType.PLUS, "+");
-            case '-' -> new Token(TokenType.MINUS, "-");
-            case '*' -> new Token(TokenType.STAR, "*");
-            case '/' -> new Token(TokenType.SLASH, "/");
-            case '=' -> new Token(TokenType.EQUAL, "=");
-            case ';' -> new Token(TokenType.SEMICOLON, ";");
-            default -> throw new RuntimeException("Unexpected character: " + c);
+
+        if (Character.isDigit(c)) {
+            StringBuilder sb = new StringBuilder();
+            while (Character.isDigit(peek())) sb.append(advance());
+                return new Token(TokenType.NUMBER, sb.toString());
         }
+
+        StringBuilder sb = new StringBuilder();
+        while (!Character.isWhitespace(peek()) &&
+           peek() != '(' &&
+           peek() != ')' &&
+           peek() != '\0') {
+           sb.append(advance());
+        }
+
+        return new Token(TokenType.SYMBOL, sb.toString());
+    }
+
 }

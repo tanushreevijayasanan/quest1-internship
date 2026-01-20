@@ -9,7 +9,7 @@ public class EvalVisitor implements Visitor<Object>{
 
     
     public EvalVisitor() {
-        this.globalEnv = GlobalEnvironment.getInstance();
+        this.globalEnv = GlobalEnvironment.INSTANCE;
     }
 
     @Override
@@ -78,10 +78,10 @@ public class EvalVisitor implements Visitor<Object>{
         boolean cond;
         if(condition instanceof Boolean){
             cond = (Boolean) condition;
-        } else if(condition instanceof Integer){
-            cond = ((Integer) condition) != 0;
+        } else if(condition instanceof Double){
+            cond = ((Double) condition) != 0.0;
         } else{
-            throw new RuntimeException("if condition must be boolean or integer");
+            throw new RuntimeException("if condition must be boolean or double");
         }
         return cond ? args.get(1).accept(this) : args.get(2).accept(this);
     }
