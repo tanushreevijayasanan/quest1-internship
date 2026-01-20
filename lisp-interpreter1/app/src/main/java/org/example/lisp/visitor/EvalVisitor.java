@@ -1,6 +1,7 @@
-package lisp.visitor;
-import lisp.ast.*;
-import lisp.env.GlobalEnvironment;
+package org.example.lisp.visitor;
+import org.example.lisp.ast.*;
+import org.example.lisp.env.GlobalEnvironment;
+import org.example.lisp.function.BuiltInFunction;
 import java.util.List;
 import java.util.stream.Collectors;
 

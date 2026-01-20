@@ -1,4 +1,4 @@
-package lisp.lexer;
+package org.example.lisp.lexer;
 
 public class Lexer {
     private final String input;
@@ -18,7 +18,7 @@ public class Lexer {
         return input.charAt(position++);
     }
 
-    Token nextToken() {
+    public Token nextToken() {
         while (Character.isWhitespace(peek())) advance();
 
         char c = peek();

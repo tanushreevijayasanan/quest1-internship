@@ -1,3 +1,6 @@
+package org.example.lisp.ast;
+
+import org.example.lisp.visitor.Visitor;
 import java.util.List;
 public class ListNode implements Node {
     private final List<Node> elements;

@@ -1,4 +1,4 @@
-package lisp.lexer;
+package org.example.lisp.lexer;
 
 public class Token {
     private TokenType type;
@@ -12,7 +12,7 @@ public class Token {
     public TokenType getType() {
         return type;
     }
-    
+
     public String getLexeme() {
         return lexeme;
     }

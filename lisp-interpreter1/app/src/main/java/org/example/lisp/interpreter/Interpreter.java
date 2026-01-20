@@ -1,8 +1,12 @@
-package lisp.interpreter;
+package org.example.lisp.interpreter;
 
-import lisp.env.GlobalEnvironment;
-import lisp.visitor.EvalVisitor;
-import lisp.ast.Node;
+import org.example.lisp.env.GlobalEnvironment;
+import org.example.lisp.visitor.EvalVisitor;
+import org.example.lisp.ast.Node;
+import org.example.lisp.lexer.Lexer;
+import org.example.lisp.parser.Parser;
+import org.example.lisp.function.BuiltInFunction;
+
 
 public class Interpreter{
     private final GlobalEnvironment globalEnv;

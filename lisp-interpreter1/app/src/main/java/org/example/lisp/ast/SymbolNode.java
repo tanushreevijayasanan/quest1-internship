@@ -1,3 +1,5 @@
+package org.example.lisp.ast;
+import org.example.lisp.visitor.Visitor;
 public class SymbolNode implements Node {
     private final String name;
 

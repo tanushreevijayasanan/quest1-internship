@@ -1,16 +1,16 @@
-package lisp.parser;
+package org.example.lisp.parser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lisp.lexer.*;
-import lisp.ast.*;
+import org.example.lisp.lexer.*;
+import org.example.lisp.ast.*;
 
 public class Parser {
     private final Lexer lexer;
     private Token currentToken;
 
-    Parser(Lexer lexer) {
+    public Parser(Lexer lexer) {
         this.lexer = lexer;
         this.currentToken = lexer.nextToken();
     }

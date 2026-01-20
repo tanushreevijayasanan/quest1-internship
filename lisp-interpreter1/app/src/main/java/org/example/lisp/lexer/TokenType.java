@@ -1,4 +1,4 @@
-package lisp.lexer;
+package org.example.lisp.lexer;
 public enum TokenType {
     LPAREN,
     RPAREN,
