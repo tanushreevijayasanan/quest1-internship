@@ -1,4 +1,4 @@
-package lisp.visitor;
+package org.example.lisp.visitor;
 import lisp.ast.*;
 import lisp.env.GlobalEnvironment;
 import java.util.List;
@@ -28,7 +28,7 @@ public class EvalVisitor implements Visitor<Object>{
 
     @Override
     public Object visit(ListNode listNode){
-        List<Node> elements = listNode.getChildren();
+        List<Node> elements = listNode.getElements();
         if (elements.isEmpty()) {
             throw new RuntimeException("can't evaluate empty list");
         }
