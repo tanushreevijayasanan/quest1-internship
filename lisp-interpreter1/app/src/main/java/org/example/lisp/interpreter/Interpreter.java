@@ -9,8 +9,8 @@ public class Interpreter{
     private final EvalVisitor evalVisitor;
 
     public Interpreter() {
-        this.globalEnv = new GlobalEnvironment();
-        this.evalVisitor = new EvalVisitor(globalEnv);
+        this.globalEnv = GlobalEnvironment.INSTANCE;
+        this.evalVisitor = new EvalVisitor();
 
         registerBuiltIns();
     }
@@ -76,12 +76,11 @@ public class Interpreter{
         }));
     }
 
+    public Object eval(String source){
+        throw new UnsupportedOperationException("lexer and parser not implemented yet");
+    }
+
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        System.out.println(interpreter.eval("(+ 1 2 3)"));        
-        System.out.println(interpreter.eval("(* 2 3 4)"));        
-        System.out.println(interpreter.eval("(define x 10)"));
-        System.out.println(interpreter.eval("(+ x 5)"));          
-        System.out.println(interpreter.eval("(if (< 3 5) 100 200)"));
     }
 }

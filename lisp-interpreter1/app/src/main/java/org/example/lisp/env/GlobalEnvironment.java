@@ -2,7 +2,8 @@ package lisp.env;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GlobalEnvironment {
+public enum GlobalEnvironment {
+    INSTANCE;
     private final Map<String, Object> bindings;
     public GlobalEnvironment() {
         this.bindings = new HashMap<>();

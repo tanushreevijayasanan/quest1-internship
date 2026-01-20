@@ -1,4 +1,4 @@
-package org.example.lisp.visitor;
+package lisp.visitor;
 import lisp.ast.*;
 import lisp.env.GlobalEnvironment;
 import java.util.List;
@@ -8,8 +8,8 @@ public class EvalVisitor implements Visitor<Object>{
     private final GlobalEnvironment globalEnv;
 
     
-    public EvalVisitor(GlobalEnvironment globalEnv) {
-        this.globalEnv = globalEnv;
+    public EvalVisitor() {
+        this.globalEnv = GlobalEnvironment.getInstance();
     }
 
     @Override
