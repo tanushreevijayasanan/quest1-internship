@@ -1,4 +1,4 @@
-public class SymbolNode {
+public class SymbolNode implements Node {
     private final String name;
 
     public SymbolNode(String name) {
