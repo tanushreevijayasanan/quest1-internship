@@ -1,11 +1,11 @@
 package org.example.lisp.interpreter;
 
-import org.example.lisp.env.GlobalEnvironment;
-import org.example.lisp.visitor.EvalVisitor;
 import org.example.lisp.ast.Node;
+import org.example.lisp.env.GlobalEnvironment;
+import org.example.lisp.function.BuiltInFunction;
 import org.example.lisp.lexer.Lexer;
 import org.example.lisp.parser.Parser;
-import org.example.lisp.function.BuiltInFunction;
+import org.example.lisp.visitor.EvalVisitor;
 
 
 public class Interpreter{
@@ -89,7 +89,7 @@ public class Interpreter{
 
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        String source = "(+ 1 2 3 4 5)";
+        String source = "(define x 10) (+ x 20)";
         Object result = interpreter.eval(source);
         System.out.println("Result: " + result);
     }

@@ -42,10 +42,7 @@ public class Lexer {
         }
 
         StringBuilder sb = new StringBuilder();
-        while (!Character.isWhitespace(peek()) &&
-           peek() != '(' &&
-           peek() != ')' &&
-           peek() != '\0') {
+        while (!Character.isWhitespace(peek()) && peek() != '(' && peek() != ')' && peek() != '\0') {
            sb.append(advance());
         }
 

@@ -3,8 +3,13 @@ package org.example.lisp.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.example.lisp.lexer.*;
-import org.example.lisp.ast.*;
+import org.example.lisp.ast.ListNode;
+import org.example.lisp.ast.Node;
+import org.example.lisp.ast.NumberNode;
+import org.example.lisp.ast.SymbolNode;
+import org.example.lisp.lexer.Lexer;
+import org.example.lisp.lexer.Token;
+import org.example.lisp.lexer.TokenType;
 
 public class Parser {
     private final Lexer lexer;
@@ -17,6 +22,14 @@ public class Parser {
 
     public void advance() {
         currentToken = lexer.nextToken();
+    }
+
+    public List<Node> parseAll(){
+        List<Node> expressions = new ArrayList<>();
+        while (currentToken.getType() != TokenType.EOF){
+            expressions.add(parseExpression());
+        }
+        return expressions;
     }
 
     public Node parseExpression() {

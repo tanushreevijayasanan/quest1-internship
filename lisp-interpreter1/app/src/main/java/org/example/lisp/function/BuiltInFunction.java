@@ -6,6 +6,7 @@ import java.util.function.Function;
 public class BuiltInFunction {
     private final String name;
     private final Function<List<Object>, Object> implementation;
+    
     public BuiltInFunction(String name, Function<List<Object>, Object> implementation) {
         this.name = name;
         this.implementation = implementation;
