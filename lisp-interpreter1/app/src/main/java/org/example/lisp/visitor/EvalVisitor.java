@@ -1,12 +1,17 @@
 package org.example.lisp.visitor;
-import org.example.lisp.ast.*;
-import org.example.lisp.env.GlobalEnvironment;
-import org.example.lisp.function.BuiltInFunction;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.example.lisp.ast.ListNode;
+import org.example.lisp.ast.Node;
+import org.example.lisp.ast.NumberNode;
+import org.example.lisp.ast.SymbolNode;
+import org.example.lisp.env.GlobalEnvironment;
+import org.example.lisp.function.BuiltInFunction;
+
 public class EvalVisitor implements Visitor<Object>{
     private final GlobalEnvironment globalEnv;
+    private static final int if_syntaxSize = 3;
 
     
     public EvalVisitor() {
@@ -72,7 +77,7 @@ public class EvalVisitor implements Visitor<Object>{
     }
 
     private Object handleIf(List<Node> args){
-        if (args.size() != 3){
+        if (args.size() != if_syntaxSize) {
             throw new RuntimeException("invalid if syntax");
         }
         Object condition = args.get(0).accept(this);

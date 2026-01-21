@@ -3,6 +3,10 @@ package org.example.lisp.lexer;
 public class Lexer {
     private final String input;
     private int position = 0;
+    private static final char EOF_CHAR = '\0';
+    private static final char LPAREN_CHAR = '(';
+    private static final char RPAREN_CHAR = ')';
+
     public Lexer(String input) {
         this.input = input;
     }
@@ -22,15 +26,15 @@ public class Lexer {
         while (Character.isWhitespace(peek())) advance();
 
         char c = peek();
-        if (c == '\0') 
+        if (c == EOF_CHAR) 
             return new Token(TokenType.EOF, "");
 
-        if (c == '(') {
+        if (c == LPAREN_CHAR) {
             advance();
             return new Token(TokenType.LPAREN, "(");
         }
 
-        if (c == ')') {
+        if (c == RPAREN_CHAR) {
             advance();
             return new Token(TokenType.RPAREN, ")");
         }

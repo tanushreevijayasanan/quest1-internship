@@ -1,4 +1,5 @@
 package org.example.lisp.interpreter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,9 +9,11 @@ import org.example.lisp.function.BuiltInFunction;
 import org.example.lisp.lexer.Lexer;
 import org.example.lisp.parser.Parser;
 import org.example.lisp.visitor.EvalVisitor;
-public class Interpreter{
+public final class Interpreter{
+    private static final int argumentSize = 2;
     private final GlobalEnvironment globalEnv;
     private final EvalVisitor evalVisitor;
+    private static final String exitCommand = "exit";
 
     public Interpreter() {
         this.globalEnv = GlobalEnvironment.INSTANCE;
@@ -18,7 +21,7 @@ public class Interpreter{
         registerBuiltIns();
     }
 
-    public void registerBuiltIns(){
+    private void registerBuiltIns(){
         globalEnv.define("+", new BuiltInFunction("+", args -> {
             double sum = 0;
             for (Object arg : args) {
@@ -62,21 +65,21 @@ public class Interpreter{
         }));
 
         globalEnv.define("=", new BuiltInFunction("=", args -> {
-            if (args.size() != 2) {
+            if (args.size() != argumentSize) {
                 throw new RuntimeException("'=' requires exactly two arguments");
             }
             return args.get(0).equals(args.get(1));
         }));
 
         globalEnv.define("<", new BuiltInFunction("<", args -> {
-            if (args.size() != 2) {
+            if (args.size() != argumentSize) {
                 throw new RuntimeException("'<' requires exactly two arguments");
             }
             return (Double) args.get(0) < (Double) args.get(1);
         }));
 
         globalEnv.define(">", new BuiltInFunction(">", args -> {
-            if (args.size() != 2) {
+            if (args.size() != argumentSize) {
                 throw new RuntimeException("'>' requires exactly two arguments");
             }
             return (Double) args.get(0) > (Double) args.get(1);
@@ -93,31 +96,32 @@ public class Interpreter{
         }
         return result;
     }
+
     public void repl(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("welcome to the Lisp Interpreter. type 'exit' to quit.");
-        while (true){
-            System.out.println("lisp >");
-            if (!scanner.hasNextLine()){
-                break;
-            }
-            String input = scanner.nextLine().trim();
-            if (input.equals("exit")){
-                System.out.println("bye bye!");
-                break;
-            }   
-            if (input.isEmpty()){
-                continue;
-            }
-            try{
-                Object result = evalAll(input);
-                System.out.println("=> " + result);
-            } catch (Exception e){
-                System.out.println("Error: " + e.getMessage());
+        try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)){
+            System.out.println("welcome to the Lisp Interpreter. type 'exit' to quit.");
+            while (true){
+                System.out.println("lisp >");
+                if (!scanner.hasNextLine()){
+                    break;
+                }
+                String input = scanner.nextLine().trim();
+                if (input.equals(exitCommand)){
+                    System.out.println("bye bye!");
+                    break;
+                }   
+                if (input.isEmpty()){
+                    continue;
+                }
+                try{
+                    Object result = evalAll(input);
+                    System.out.println("=> " + result);
+                } catch (Exception e){
+                    System.out.println("Error: " + e.getMessage());
+                }
             }
         }
     }
-
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
         interpreter.repl();

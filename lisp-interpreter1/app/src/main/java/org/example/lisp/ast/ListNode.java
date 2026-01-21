@@ -1,16 +1,17 @@
 package org.example.lisp.ast;
 
-import org.example.lisp.visitor.Visitor;
 import java.util.List;
+
+import org.example.lisp.visitor.Visitor;
 public class ListNode implements Node {
     private final List<Node> elements;
 
     public ListNode(List<Node> elements) {
-        this.elements = elements;
+        this.elements = List.copyOf(elements);
     }
 
     public List<Node> getElements() {
-        return elements;
+        return List.copyOf(elements);
     }
 
     @Override
