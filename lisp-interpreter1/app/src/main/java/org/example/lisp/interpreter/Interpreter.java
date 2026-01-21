@@ -101,7 +101,7 @@ public class Interpreter{
 
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        String source = "(define x 10) (+ x 20)";
+        String source = "(define x 10) (if (< x 20) (+ x 5) (- x 5))";
         Object result = interpreter.evalAll(source);
         System.out.println("Result: " + result);
     }
