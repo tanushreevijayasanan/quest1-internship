@@ -17,6 +17,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }

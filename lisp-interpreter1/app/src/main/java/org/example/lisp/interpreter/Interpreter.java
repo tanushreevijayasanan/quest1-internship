@@ -1,5 +1,6 @@
 package org.example.lisp.interpreter;
 import java.util.List;
+import java.util.Scanner;
 
 import org.example.lisp.ast.Node;
 import org.example.lisp.env.GlobalEnvironment;
@@ -51,7 +52,11 @@ public class Interpreter{
             }
             double result = (Double) args.get(0);
             for (int i = 1; i < args.size(); i++) {
-                result /= (Double) args.get(i);
+                double divisor = (Double) args.get(i);
+                if (divisor == 0) {
+                    throw new RuntimeException("division by zero");
+                }
+                result /= divisor;
             }
             return result;
         }));
@@ -88,11 +93,33 @@ public class Interpreter{
         }
         return result;
     }
+    public void repl(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("welcome to the Lisp Interpreter. type 'exit' to quit.");
+        while (true){
+            System.out.println("lisp >");
+            if (!scanner.hasNextLine()){
+                break;
+            }
+            String input = scanner.nextLine().trim();
+            if (input.equals("exit")){
+                System.out.println("bye bye!");
+                break;
+            }   
+            if (input.isEmpty()){
+                continue;
+            }
+            try{
+                Object result = evalAll(input);
+                System.out.println("=> " + result);
+            } catch (Exception e){
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        String source = "(define x 10) (if (< x 20) (+ x 5) (- x 5))";
-        Object result = interpreter.evalAll(source);
-        System.out.println("Result: " + result);
+        interpreter.repl();
     }
 }
