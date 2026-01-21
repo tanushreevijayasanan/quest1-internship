@@ -1,5 +1,4 @@
 package org.example.lisp.interpreter;
-
 import java.util.List;
 
 import org.example.lisp.ast.Node;
@@ -8,8 +7,6 @@ import org.example.lisp.function.BuiltInFunction;
 import org.example.lisp.lexer.Lexer;
 import org.example.lisp.parser.Parser;
 import org.example.lisp.visitor.EvalVisitor;
-
-
 public class Interpreter{
     private final GlobalEnvironment globalEnv;
     private final EvalVisitor evalVisitor;
@@ -17,7 +14,6 @@ public class Interpreter{
     public Interpreter() {
         this.globalEnv = GlobalEnvironment.INSTANCE;
         this.evalVisitor = new EvalVisitor();
-
         registerBuiltIns();
     }
 
@@ -81,13 +77,7 @@ public class Interpreter{
             return (Double) args.get(0) > (Double) args.get(1);
         }));
     }
-
-    public Object eval(String source){
-        Lexer lexer = new Lexer(source);
-        Parser parser = new Parser(lexer);
-        Node ast = parser.parseExpression();
-        return ast.accept(evalVisitor);
-    }   
+    
     public Object evalAll(String source){
         Lexer lexer = new Lexer(source);
         Parser parser = new Parser(lexer);
