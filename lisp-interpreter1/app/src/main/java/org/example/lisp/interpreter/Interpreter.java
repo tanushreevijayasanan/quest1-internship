@@ -1,5 +1,7 @@
 package org.example.lisp.interpreter;
 
+import java.util.List;
+
 import org.example.lisp.ast.Node;
 import org.example.lisp.env.GlobalEnvironment;
 import org.example.lisp.function.BuiltInFunction;
@@ -85,12 +87,22 @@ public class Interpreter{
         Parser parser = new Parser(lexer);
         Node ast = parser.parseExpression();
         return ast.accept(evalVisitor);
+    }   
+    public Object evalAll(String source){
+        Lexer lexer = new Lexer(source);
+        Parser parser = new Parser(lexer);
+        List<Node> expressions = parser.parseAll();
+        Object result = null;
+        for(Node ast : expressions){
+            result = ast.accept(evalVisitor);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
         String source = "(define x 10) (+ x 20)";
-        Object result = interpreter.eval(source);
+        Object result = interpreter.evalAll(source);
         System.out.println("Result: " + result);
     }
 }
